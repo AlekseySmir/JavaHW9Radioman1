@@ -16,9 +16,9 @@ public class RadioTest {
     @Test // следующая станция в пределах
     public void currentStationPlusOne(){
         Radio rad = new Radio ();
-        rad.setCurrentRadioStation(6);
+        rad.setCurrentRadioStation(8);
         rad.nextStation();
-        int expected = 7;
+        int expected = 9;
         int actual = rad.currentRadioStation;
         Assertions.assertEquals(expected, actual);
     }
@@ -34,9 +34,9 @@ public class RadioTest {
     @Test // предыдущая станция в пределах
     public void currentStationMinusOne(){
         Radio rad = new Radio();
-        rad.setCurrentRadioStation(3);
+        rad.setCurrentRadioStation(6);
         rad.prevStation();
-        int expected = 2;
+        int expected = 5;
         int actual = rad.currentRadioStation;
         Assertions.assertEquals(expected, actual);
     }
@@ -89,21 +89,39 @@ public class RadioTest {
         int actual = rad.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
-    @Test // увеличение громкости
-    public void currentVolumePlusOne(){
+    @Test // увеличение громкости, если громкость максимальная
+    public void currentVolumePlusOneFromMax(){
         Radio rad = new Radio ();
-        rad.setCurrentVolume(6);
+        rad.setCurrentVolume(10);
         rad.nextVolume();
-        int expected = 7;
+        int expected = 10;
         int actual = rad.currentVolume;
         Assertions.assertEquals(expected, actual);
     }
-    @Test
+    @Test // увеличение громкости на 1
+    public void currentVolumePlusOne(){
+        Radio rad = new Radio ();
+        rad.setCurrentVolume(9);
+        rad.nextVolume();
+        int expected = 10;
+        int actual = rad.currentVolume;
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test // уменьшение громкости, если громкость минимальная
+    public void currentVolumeMinusOneFromMin(){
+        Radio rad = new Radio ();
+        rad.setCurrentVolume(0);
+        rad.prevVolume();
+        int expected = 0;
+        int actual = rad.currentVolume;
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test // уменьшение громкости на 1
     public void currentVolumeMinusOne(){
         Radio rad = new Radio ();
-        rad.setCurrentVolume(6);
+        rad.setCurrentVolume(1);
         rad.prevVolume();
-        int expected = 5;
+        int expected = 0;
         int actual = rad.currentVolume;
         Assertions.assertEquals(expected, actual);
     }

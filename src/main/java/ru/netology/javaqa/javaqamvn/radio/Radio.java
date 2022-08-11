@@ -2,56 +2,71 @@ package ru.netology.javaqa.javaqamvn.radio;
 
 public class Radio {
     public int currentRadioStation; //задание станции
-    public int maxRadioStation = 9;
-    public int minRadioStation = 0;
+
     public int currentVolume; // задание громкости
-    public int maxVolume = 10;
-    public int minVolume = 0;
 
+    public int getCurrentRadioStation() { // запрос станции
 
-    public int getCurrentRadioStation(){ // запрос станции
         return currentRadioStation;
     }
-    public void setCurrentRadioStation (int newStation) { //условие что станция в пределах
-        if (newStation < minRadioStation) {
-            return;
+
+    public int setCurrentRadioStation(int newStation) { //условие что станция в пределах
+        if (newStation >= 0 && newStation <=9) {
+            currentRadioStation = newStation;
+
         }
-        if (newStation > maxRadioStation) {
-            return;
-        }
-        currentRadioStation = newStation;
+        return currentRadioStation;
     }
-    public void nextStation(){ // переход на следующую станцию
-        if (currentRadioStation >= maxRadioStation){
-            setCurrentRadioStation(minRadioStation);
-        } else {
-            setCurrentRadioStation(currentRadioStation + 1);
+    public int nextStation() { // переход на следующую станцию
+        if (currentRadioStation < 9) {
+           currentRadioStation = currentRadioStation +1;
         }
-    }
-    public void prevStation(){ //переход на предыдущую станцию
-        if (currentRadioStation <=minRadioStation){
-            setCurrentRadioStation(maxRadioStation);
-        } else {
-            setCurrentRadioStation(currentRadioStation - 1);
+        else {
+            currentRadioStation = 0;
         }
+        return currentRadioStation;
     }
-    public int getCurrentVolume(){ // запрос громкости
+
+    public int prevStation() { //переход на предыдущую станцию
+        if (currentRadioStation > 0) {
+            currentRadioStation = currentRadioStation - 1;
+        }
+        else{
+            currentRadioStation = 9;
+        }
+        return currentRadioStation;
+    }
+
+    public int getCurrentVolume() { // запрос громкости
         return currentVolume;
     }
-    public void setCurrentVolume (int newVolume) { //условие что громкость в пределах
-        if (newVolume < minVolume) {
+
+    public void setCurrentVolume(int newVolume) { //условие что громкость в пределах
+        if (newVolume < 0) {
             return;
         }
-        if (newVolume > maxVolume) {
+        if (newVolume > 10) {
             return;
         }
         currentVolume = newVolume;
     }
-    public void nextVolume(){ // увеличение громкости
-        setCurrentVolume(currentVolume + 1);
+//////   (изменить!!!!!!!)закоммитить и запушить
+    public int nextVolume() { // увеличение громкости
+        if (currentVolume < 10){
+            currentVolume = currentVolume + 1;
+        } else {
+            currentVolume = 10;
+        }
+        return currentVolume;
     }
-    public void prevVolume(){  // уменьшение громкости
-        setCurrentVolume(currentVolume - 1);
+
+    public int prevVolume() {  // уменьшение громкости
+        if (currentVolume > 0){
+            currentVolume = currentVolume - 1;
+        } else {
+            currentVolume = 0;
+        }
+        return currentVolume;
     }
 
 }
